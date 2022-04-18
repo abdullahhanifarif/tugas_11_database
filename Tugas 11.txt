@@ -1,0 +1,95 @@
+Tugas 11
+
+
+1. 	Buatlah user baru dengan nama Niomic dengan password c0b4d1b4c4!
+
+2. 	Ubah password menjadi indonesiaku dengan perintah update set
+
+3. 	Berikan hak akses ke user Niomic untuk tabel mahasiswa pada database belajar
+
+4. 	Hapus user Niomic
+
+
+Jawaban:
+1.	c:\xampp\mysql\bin>mysql -u root
+	Welcome to the MariaDB monitor.  Commands end with ; or \g.
+	Your MariaDB connection id is 18
+	Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+	Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+	MariaDB [(none)]> CREATE USER 'Niomic'@'localhost' IDENTIFIED BY 'c0b4d1b4c4';
+	Query OK, 0 rows affected (0.019 sec)
+
+	MariaDB [(none)]>
+
+
+
+
+
+2.	MariaDB [mysql]> SET PASSWORD FOR 'Niomic'@'localhost' = PASSWORD('indonesiaku');
+	Query OK, 0 rows affected (0.028 sec)
+
+
+
+
+
+3.	MariaDB [mysql]> GRANT ALL ON belajar.mahasiswa TO Niomic@localhost;
+	Query OK, 0 rows affected (0.064 sec)
+
+	MariaDB [mysql]>EXIT;
+	Bye
+
+	c:\xampp\mysql\bin>mysql -uNiomic -pindonesiaku
+	Welcome to the MariaDB monitor.  Commands end with ; or \g.
+	Your MariaDB connection id is 28
+	Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+	Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+	MariaDB [(none)]> SHOW DATABASES;
+	+--------------------+
+	| Database           |
+	+--------------------+
+	| belajar            |
+	| information_schema |
+	+--------------------+
+	2 rows in set (0.000 sec)
+
+	MariaDB [(none)]>
+
+
+
+
+
+4.	c:\xampp\mysql\bin>mysql -uroot
+	Welcome to the MariaDB monitor.  Commands end with ; or \g.
+	Your MariaDB connection id is 29
+	Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+	Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+	Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+	MariaDB [(none)]> DROP USER 'Niomic'@'localhost';
+	Query OK, 0 rows affected (0.024 sec)
+
+	MariaDB [(none)]> USE mysql;
+	Database changed
+	MariaDB [mysql]> SELECT User, Host, Password FROM user;
+	+------+-----------+----------+
+	| User | Host      | Password |
+	+------+-----------+----------+
+	| root | localhost |          |
+	| root | 127.0.0.1 |          |
+	| root | ::1       |          |
+	| pma  | localhost |          |
+	+------+-----------+----------+
+	4 rows in set (0.031 sec)
+
+	MariaDB [mysql]>
+
